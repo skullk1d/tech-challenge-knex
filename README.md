@@ -1,4 +1,4 @@
-## Welcome to the Articulate Developer Challenge!
+## Welcome to the Rise Developer Challenge!
 
 ### The coding challenge
 
