@@ -2,7 +2,7 @@
 
 ### The coding challenge
 
-Your goal is to implement one of Rise's interactive blocks (see [this Rise course](https://rise.articulate.com/share/QNNxptM9l1O6nA-l3BNQdOO-_6dW8prV) for more details).
+Your goal is to implement one of Rise's interactive blocks (see [this Rise course](https://rise.articulate.com/share/IUB9zxbEaKjSQ89lw74eevjW1qC7d-54) for more details).
 
 At a minimum, your implementation should:
 1. populate your interactive block's configuration from the provided REST API (see [`/server`](/server))
