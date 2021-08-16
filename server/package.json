@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "db:migrate": "knex migrate:latest",
+    "db:seed": "knex seed:run",
+    "setup": "yarn db:migrate && yarn db:seed"
   },
   "dependencies": {
     "express": "^4.17.1",
-    "morgan": "^1.10.0"
+    "knex": "^0.21.21",
+    "morgan": "^1.10.0",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
