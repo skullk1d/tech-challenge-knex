@@ -3,13 +3,17 @@ version: '3.8'
 services:
   app:
     build: .
-    command: 'yarn start'
+    # command: 'yarn start'
     ports:
-      - '5000:5000'
+      - '3000:3000'
     volumes:
       - './package.json:/service/package.json'
       - './src:/service/src'
       - './yarn.lock:/service/yarn.lock'
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgres://postgres@postgres:5432/postgres
 
   postgres:
     image: postgres:12
@@ -17,6 +21,5 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     expose:
       - "5432"
-## -- Uncomment to use port 7482 instead of 5432 (in case of port collision) -- ##
-    # ports:
-    #   - "7482:5432"
+    ports:
+      - "7482:5432"

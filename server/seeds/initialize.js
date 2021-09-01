@@ -18,6 +18,12 @@ exports.seed = async knex => {
     mediaId: '9b18dff4-8891-4874-a43d-ccc00477a19b',
   })
 
+  await knex('knowledgeCheckBlocks').insert({
+    id: 'e50acfd3-a870-4cad-9ef2-a2ca30d24d81',
+    questionId: 'a8ebfafd-d81a-42ec-b54c-c14d007cd54e',
+    feedback: 'I just love cookies and a warm cup of coffee!',
+  })
+
   await knex('answers').insert([
     {
       id: '023d3f04-194a-484e-aad4-800ee04de372',
@@ -34,11 +40,4 @@ exports.seed = async knex => {
       pos: 1,
     },
   ])
-
-  await knex('knowledgeCheckBlocks').insert({
-    id: 'e50acfd3-a870-4cad-9ef2-a2ca30d24d81',
-    questionId: 'a8ebfafd-d81a-42ec-b54c-c14d007cd54e',
-    feedback: 'I just love cookies and a warm cup of coffee!',
-  })
-
 }

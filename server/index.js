@@ -30,7 +30,7 @@ const db = {
 
 function server() {
   const app = express()
-  const port = process.env.PORT || 5000
+  const port = 3000
 
   app.use(morgan('dev'))
 
