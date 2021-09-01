@@ -15,13 +15,22 @@ What you choose to implement from there is up to you. :)
 
 - your interactive block implementation should live in the [`/client`](/client) directory and have its own `package.json`, `node_modules`, etc.
 - feel free to bootstrap your solution with [create-react-app](https://github.com/facebookincubator/create-react-app) (or whatever tools you prefer)
-- the beginnings of a REST API lives in [`/server`](/server) and is reachable at http://localhost:5000
-  - the REST API currently uses variables as a makeshift in-memory database
+- the beginnings of a REST API lives in [`/server`](/server) and is reachable at http://localhost:3000
+  - the REST API currently only returns the parent `knowledgeCheckBlock` with no questions, answers, or media tied to it.
 
 ### Getting started
 
 To get the REST API up and running on your dev machine:
 
 1. `cd server`
-1. `yarn install` (or `npm install`)
-1. `yarn start` (or `npm start`)
+1. `docker-compose up`
+
+The server will be available at port 3000 and the database will be available at port 7482
+
+### Rebuilding Docker
+
+If you install any new packages or add a new database migration file you'll want to rebuild the docker containers. To do so:
+
+1. Close out of docker with `CMD + C` or `CTRL + C`
+1. `docker-compose down`
+1. `docker-compose up --build`
