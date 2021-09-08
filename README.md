@@ -27,10 +27,10 @@ To get the REST API up and running on your dev machine:
 
 The server will be available at port 3000 and the database will be available at port 7482
 
-### Rebuilding Docker
+### Rebuilding Docker Containers
 
 If you install any new packages or add a new database migration file you'll want to rebuild the docker containers. To do so:
 
-1. Close out of docker with `CMD + C` or `CTRL + C`
+1. Stop your docker containers with `CMD + C` or `CTRL + C`
 1. `docker-compose down`
 1. `docker-compose up --build`
