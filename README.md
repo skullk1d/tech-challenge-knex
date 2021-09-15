@@ -5,9 +5,10 @@
 Your goal is to implement one of Rise's interactive blocks (see [this Rise course](https://rise.articulate.com/share/IUB9zxbEaKjSQ89lw74eevjW1qC7d-54) for more details).
 
 At a minimum, your implementation should:
-1. populate your interactive block's configuration from the provided REST API (see [`/server`](/server))
-1. use `react` for your UI components
-1. persist your interactive block's UI state by extending the provided REST API
+1. Decorate the knowledge block returned from [`getKnowledgeCheckBlocks`](/server/index.js) with `questions`, `answers`, and `media` from the Postgress Database.
+1. Populate your interactive block's configuration from the provided REST API (see [`/server`](/server))
+1. Use `react` for your UI components.
+1. Persist your interactive block's UI state by extending the provided REST API.
 
 What you choose to implement from there is up to you. :)
 
@@ -20,7 +21,15 @@ What you choose to implement from there is up to you. :)
 
 ### Getting started
 
-To get the REST API up and running on your dev machine:
+#### Install Docker
+
+Install [Docker Community Edition](https://hub.docker.com/search?q=&type=edition&offering=community)
+
+- :apple: [macOS](https://hub.docker.com/editions/community/docker-ce-desktop-mac)
+- :penguin: [Linux](https://hub.docker.com/search/?type=edition&offering=community&operating_system=linux)
+- :window: [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
+
+#### Running the server
 
 1. `cd server`
 1. `docker-compose up`
