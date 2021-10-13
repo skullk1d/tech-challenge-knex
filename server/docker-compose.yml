@@ -7,8 +7,8 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - './package.json:/service/package.json'
       - './src:/service/src'
+      - './package.json:/service/package.json'
       - './yarn.lock:/service/yarn.lock'
     depends_on:
       - postgres
