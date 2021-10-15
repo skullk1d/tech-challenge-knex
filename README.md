@@ -27,7 +27,7 @@ Install [Docker Community Edition](https://hub.docker.com/search?q=&type=edition
 
 - :apple: [macOS](https://hub.docker.com/editions/community/docker-ce-desktop-mac)
 - :penguin: [Linux](https://hub.docker.com/search/?type=edition&offering=community&operating_system=linux)
-- :window: [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
+- 🪟 [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
 
 #### Running the server
 
