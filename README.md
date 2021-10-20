@@ -5,8 +5,8 @@
 Your goal is to implement one of Rise's interactive blocks (see [this Rise course](https://rise.articulate.com/share/IUB9zxbEaKjSQ89lw74eevjW1qC7d-54) for more details).
 
 At a minimum, your implementation should:
-1. Decorate the knowledge block returned from [`getKnowledgeCheckBlocks`](/server/index.js) with `questions`, `answers`, and `media` from the Postgress Database.
-1. Populate your interactive block's configuration from the provided REST API (see [`/server`](/server))
+1. Decorate the knowledge block returned from [`getKnowledgeCheckBlocks`](/server/src/index.js) with `questions`, `answers`, and `media` from the Postgress Database.
+1. Populate your interactive block's configuration from the provided REST API (see [`/server`](/server/src/))
 1. Use `react` for your UI components.
 1. Persist your interactive block's UI state by extending the provided REST API.
 
@@ -16,7 +16,7 @@ What you choose to implement from there is up to you. :)
 
 - your interactive block implementation should live in the [`/client`](/client) directory and have its own `package.json`, `node_modules`, etc.
 - feel free to bootstrap your solution with [create-react-app](https://github.com/facebookincubator/create-react-app) (or whatever tools you prefer)
-- the beginnings of a REST API lives in [`/server`](/server) and is reachable at http://localhost:3000
+- the beginnings of a REST API lives in [`/server`](/server/src/) and is reachable at http://localhost:3000
   - the REST API currently only returns the parent `knowledgeCheckBlock` with no questions, answers, or media tied to it.
 
 ### Getting started
