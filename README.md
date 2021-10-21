@@ -7,15 +7,14 @@ Your goal is to implement one of Rise's interactive blocks (see [this Rise cours
 At a minimum, your implementation should:
 1. Decorate the knowledge block returned from [`getKnowledgeCheckBlocks`](/server/src/index.js) with `questions`, `answers`, and `media` from the Postgress Database.
 1. Populate your interactive block's configuration from the provided REST API (see [`/server`](/server/src/))
-1. Use `react` for your UI components.
+1. use `react` and JavaScript for your UI components
 1. Persist your interactive block's UI state by extending the provided REST API.
 
 What you choose to implement from there is up to you. :)
 
 ### Implementation notes:
 
-- your interactive block implementation should live in the [`/client`](/client) directory and have its own `package.json`, `node_modules`, etc.
-- feel free to bootstrap your solution with [create-react-app](https://github.com/facebookincubator/create-react-app) (or whatever tools you prefer)
+- your interactive block implementation should live in the [`/client`](/client) directory, an app skeleton has been provided in the directory
 - the beginnings of a REST API lives in [`/server`](/server/src/) and is reachable at http://localhost:3000
   - the REST API currently only returns the parent `knowledgeCheckBlock` with no questions, answers, or media tied to it.
 
@@ -29,7 +28,13 @@ Install [Docker Community Edition](https://hub.docker.com/search?q=&type=edition
 - :penguin: [Linux](https://hub.docker.com/search/?type=edition&offering=community&operating_system=linux)
 - 🪟 [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
 
-#### Running the server
+#### To get the Client up and running on your dev machine:
+
+1. `cd client`
+1. `yarn install` (or `npm install`)
+1. `yarn start` (or `npm start`)
+
+#### To get the REST API up and running on your dev machine:
 
 1. `cd server`
 1. `docker-compose up`
