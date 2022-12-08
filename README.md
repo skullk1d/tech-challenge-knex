@@ -22,7 +22,7 @@ What you choose to implement from there is up to you. :)
 ### Implementation notes:
 
 - your interactive block implementation should live in the [`/client`](/client) directory, an app skeleton has been provided in the directory
-- the beginnings of a REST API lives in [`/server`](/server/src/) and is reachable at http://localhost:3000
+- the beginnings of a REST API lives in [`/server`](/server/src/) and is reachable at http://localhost:5001
   - the REST API currently only returns the parent `knowledgeCheckBlock` with no questions, answers, or media tied to it.
 
 ### Getting started
@@ -41,12 +41,14 @@ Install [Docker Community Edition](https://hub.docker.com/search?q=&type=edition
 1. `yarn install` (or `npm install`)
 1. `yarn start` (or `npm start`)
 
+The client will be available at port 3000
+
 #### To get the REST API up and running on your dev machine:
 
 1. `cd server`
 1. `docker-compose up`
 
-The server will be available at port 3000 and the database will be available at port 7482
+The server will be available at port 5001 and the database will be available at port 7482
 
 ### Rebuilding Docker Containers
 
