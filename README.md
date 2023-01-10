@@ -15,7 +15,6 @@ At a minimum, your implementation should:
 - [ ] In addition to implementing the knowledge check block, your solution must also maintain its visual state across page refreshes. I.e., if you interact with your block and then refresh the page, the UI state of your interactive block should be the same. Extend the provided REST API to achieve this
   - Your interactive block's UI state must be persisted via the REST API (no storing it in localStorage, cookies, etc.)
 - [ ] Once completed, push your solution to the Github classroom for us to review. If additional setup steps beyond the ones provided are required, please include them in your submission.
-- [ ] _Bonus points for functional JavaScript, but not required._
 
 What you choose to implement from there is up to you. :)
 
