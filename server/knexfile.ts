@@ -1,6 +1,6 @@
 // Update with your config settings.
 
-module.exports = {
+export default {
   client: 'pg',
   connection: process.env.DATABASE_URL,
   useNullAsDefault: true,

@@ -7,9 +7,9 @@ Rise allows customers to create responsive single page, vertically scrolling les
 Your goal is to implement one of Rise's interactive blocks (see [this Rise lesson](https://rise.articulate.com/share/YaZWnWdc2El8-M-4gcZ9eQD0lB9iRXDn#/lessons/lZ0qX7FvbGICXnk-30conqfR_JAFagbh) for an example).
 
 At a minimum, your implementation should:
-- [ ] Decorate the knowledge block returned from [`getKnowledgeCheckBlocks`](/server/src/index.js) with `questions`, `answers`, and `media` from the Postgress Database.
+- [ ] Decorate the knowledge block returned from [`getKnowledgeCheckBlocks`](/server/src/index.ts) with `questions`, `answers`, and `media` from the Postgress Database.
 - [ ] Populate your interactive block's configuration from the provided REST API (see [`/server`](/server/src/))
-- [ ] Use `react` and JavaScript to create a UI that replicates [the knowledge check block from this sample lesson](https://rise.articulate.com/share/YaZWnWdc2El8-M-4gcZ9eQD0lB9iRXDn#/lessons/lZ0qX7FvbGICXnk-30conqfR_JAFagbh)
+- [ ] Use `react` and TypeScript to create a UI that replicates [the knowledge check block from this sample lesson](https://rise.articulate.com/share/YaZWnWdc2El8-M-4gcZ9eQD0lB9iRXDn#/lessons/lZ0qX7FvbGICXnk-30conqfR_JAFagbh)
   - You must use React for your UI components
 - [ ] Please stick to the visual styles we have in place. It's important that you implement the feature in full, so pay close attention to the details including how your block behaves across screen sizes. Responsiveness is a core component of Rise.
 - [ ] In addition to implementing the knowledge check block, your solution must also maintain its visual state across page refreshes. I.e., if you interact with your block and then refresh the page, the UI state of your interactive block should be the same. Extend the provided REST API to achieve this
@@ -42,8 +42,10 @@ Install [Docker Community Edition](https://hub.docker.com/search?q=&type=edition
 #### To get the Client up and running on your dev machine:
 
 1. `cd client`
+1. `nvm install`
 1. `yarn install` (or `npm install`)
 1. `yarn start` (or `npm start`)
+1. If `yarn start` is throwing errors, you may need to run: `npm_config_yes=true npx yarn-audit-fix`
 
 The client will be available at port 3000
 
