@@ -64,9 +64,9 @@ If you install any new packages or add a new database migration file you'll want
 1. `docker-compose down`
 1. `docker-compose up --build`
 
-## Part 2: Discuss with Team
+## Part 2: Next Steps
 
-You will discuss your code and explain your decisions to a small group of developers and stakeholders at Articulate. The format is modeled after the way we conduct pairing sessions and is meant to give you a glimpse into the way we work. We are SUPER friendly and it will be a fun conversation.
+Once submitted, your challenge will be reviewed by one or two engineers on the team. If the submission meets expectations for the role you will be scheduled to discuss the code and explain your decisions to a small group of developers and stakeholders at Articulate. The format is modeled after the way we conduct pairing sessions and is meant to give you a glimpse into the way we work. We are SUPER friendly and it will be a fun conversation.
 
 # Candidate Notes
 
