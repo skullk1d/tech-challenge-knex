@@ -1,4 +1,6 @@
-exports.up = async knex => {
+import type { Knex } from 'knex'
+
+export async function up(knex: Knex): Promise<void> {
   await Promise.all([
     knex.schema.createTable('knowledgeCheckBlocks', table => {
       table.uuid('id').primary()
@@ -37,7 +39,7 @@ exports.up = async knex => {
   ])
 }
 
-exports.down = async knex => {
+export async function down(knex: Knex): Promise<void> {
   await Promise.all([
     knex.schema.table('knowledgeCheckBlocks', table => {
       table.dropForeign('questionId')
