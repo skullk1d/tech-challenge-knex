@@ -1,0 +1,7 @@
+.loading > img {
+  background-color: yellow;
+}
+
+.error > img {
+  background-color: red;
+}
