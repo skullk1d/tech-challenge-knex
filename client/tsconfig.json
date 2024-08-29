@@ -3,10 +3,10 @@
     "esModuleInterop": true,
     "jsx": "react",
     "module": "commonjs",
-    "rootDir": ".",
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "es2022"
+    "target": "es2022",
+    "paths": { "@server/*": ["../server/types/*"] }
   }
 }
