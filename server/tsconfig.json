@@ -4,9 +4,10 @@
     "rootDir": ".",
     "skipLibCheck": true,
     "strict": true,
+    "strictNullChecks": true,
     "target": "es2022",
     "moduleResolution": "NodeNext",
-    "module": "NodeNext",
+    "module": "NodeNext"
   },
   "include": ["./**/*.ts"]
 }
