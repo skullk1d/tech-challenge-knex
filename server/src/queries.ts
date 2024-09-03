@@ -10,22 +10,12 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
   .join("media", function () {
     this.on("media.id", "=", "questions.mediaId");
   })
-  .join("answers", function () {
-    this.on("answers.knowledgeCheckBlockId", "=", "knowledgeCheckBlocks.id");
-  })
   .select(
     "knowledgeCheckBlocks.id as knowledgeCheckBlockId",
     "knowledgeCheckBlocks.feedback",
     "questions.text as questionText",
     "media.type as mediaType",
     "media.url as mediaUrl"
-  )
-  .where("answers.isCorrect", "=", "true")
-  .select(
-    "answers.id as answerId",
-    "answers.text as answerText",
-    "answers.isCorrect as answerIsCorrect",
-    "answers.pos as answerPos"
   )
   .then((rows) =>
     // Decorate with incorrect answers
@@ -38,7 +28,6 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
           "knowledgeCheckBlocks.id"
         );
       })
-      .where("answers.isCorrect", "=", "false")
       .select(
         "answers.knowledgeCheckBlockId as answerKnowledgeCheckBlockId",
         "answers.id as answerId",
@@ -57,7 +46,7 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
         rows.forEach((r) => {
           rowsHash[r.knowledgeCheckBlockId] = {
             ...r,
-            incorrectAnswers: rows_.filter(
+            answers: rows_.filter(
               (r_) => r_.knowledgeCheckBlockId === r.answerKnowledgeCheckBlockId
             ),
           };

@@ -27,6 +27,7 @@ export type Answer = {
 // Mappings
 export type MappedAnswer = {
   answerId: Answer["id"];
+  answerKnowledgeCheckBlockId: Answer["knowledgeCheckBlockId"];
   answerText: Answer["text"];
   answerIsCorrect: Answer["isCorrect"];
   answerPos: Answer["pos"];
@@ -38,9 +39,5 @@ export type AggregatedKnowledgeBlock = {
   questionText: Question["text"];
   mediaType: Media["type"];
   mediaUrl: Media["url"];
-  incorrectAnswers: Array<
-    MappedAnswer & {
-      answerKnowledgeCheckBlockId: Answer["knowledgeCheckBlockId"];
-    }
-  >;
-} & MappedAnswer;
+  answers: Array<MappedAnswer>;
+};

@@ -40,10 +40,19 @@ function App() {
           <div key={kb.knowledgeCheckBlockId}>
             <h2>{kb.questionText}</h2>
             <AsyncImage url={kb.mediaUrl ?? ""} />
-
             <form>
-              <label>{kb.answerText}</label>
-              <input type={"radio"} value={kb.answerId} name="kb.answerId" />
+              {kb.answers
+                .sort((a, b) => a.answerPos - b.answerPos)
+                .map((kba) => (
+                  <div key={kba.answerId}>
+                    <label>{kba.answerText}</label>
+                    <input
+                      type={"radio"}
+                      value={kba.answerId}
+                      name={kba.answerId}
+                    />
+                  </div>
+                ))}
             </form>
           </div>
         ))}
