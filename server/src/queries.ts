@@ -22,10 +22,10 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
   )
   .where("answers.isCorrect", "=", "true")
   .select(
-    "answers.id as answerIdCorrect",
-    "answers.text as answerTextCorrect",
-    "answers.isCorrect as answerIsCorrectCorrect",
-    "answers.pos as answerPosCorrect"
+    "answers.id as answerId",
+    "answers.text as answerText",
+    "answers.isCorrect as answerIsCorrect",
+    "answers.pos as answerPos"
   )
   .then((rows) =>
     // Decorate with incorrect answers
@@ -40,10 +40,11 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
       })
       .where("answers.isCorrect", "=", "false")
       .select(
-        "answers.id as answerIdIncorrect",
-        "answers.text as answerTextIncorrect",
-        "answers.isCorrect as answerIsCorrectIncorrect",
-        "answers.pos as answerPosIncorrect"
+        "answers.knowledgeCheckBlockId as answerKnowledgeCheckBlockId",
+        "answers.id as answerId",
+        "answers.text as answerText",
+        "answers.isCorrect as answerIsCorrect",
+        "answers.pos as answerPos"
       )
       .then((rows_) => {
         // ASSUMPTION: Knowledge blocks & answers already intersected at knowledge block id.
@@ -52,10 +53,13 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
         // HACK: No time to get type imports to work
         const rowsHash = {} as Record<string, any>;
 
+        // HACK: Brute force filtering per entry
         rows.forEach((r) => {
           rowsHash[r.knowledgeCheckBlockId] = {
             ...r,
-            incorrectAnswers: rows_,
+            incorrectAnswers: rows_.filter(
+              (r_) => r_.knowledgeCheckBlockId === r.answerKnowledgeCheckBlockId
+            ),
           };
         });
 
