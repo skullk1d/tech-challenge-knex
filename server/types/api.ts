@@ -9,3 +9,11 @@ export type Media = {
   type: string;
   url: string;
 };
+
+export type Answer = {
+  id: string;
+  knowledgeCheckBlockId: string;
+  text: string;
+  isCorrect: boolean;
+  pos: number;
+};
