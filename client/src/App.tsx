@@ -5,17 +5,21 @@ import logoRiseCom from "./logo-rise-com.svg";
 import "./App.css";
 import AsyncImage from "./components/AsyncImage";
 
-import type { Media } from "@server/api";
+import type { AggregatedKnowledgeBlock } from "@server/api";
 
 function App() {
-  const [knowledgeMedia, setKnowledgeMedia] = useState<Array<Media>>([]);
+  const [knowledgeBlocks, setKnowledgeBlocks] = useState<
+    Array<AggregatedKnowledgeBlock>
+  >([]);
 
   useEffect(() => {
-    fetch("http://localhost:5001/media").then(async (res) => {
-      const data = await res.json();
+    fetch("http://localhost:5001/knowledge-check-blocks-aggregated").then(
+      async (res) => {
+        const data = await res.json();
 
-      setKnowledgeMedia(data);
-    });
+        setKnowledgeBlocks(data);
+      }
+    );
   }, []);
 
   return (
@@ -32,7 +36,17 @@ function App() {
         <span className="App-code">{"/knowledge-check-blocks"}</span>
       </section>
       <section className="knowledge-check">
-        <AsyncImage url={knowledgeMedia[0]?.url ?? ""} />
+        {knowledgeBlocks.map((kb) => (
+          <div key={kb.knowledgeCheckBlockId}>
+            <h2>{kb.questionText}</h2>
+            <AsyncImage url={kb.mediaUrl ?? ""} />
+
+            <form>
+              <label>{kb.answerText}</label>
+              <input type={"radio"} value={kb.answerId} name="kb.answerId" />
+            </form>
+          </div>
+        ))}
       </section>
     </div>
   );
