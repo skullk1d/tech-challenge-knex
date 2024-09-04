@@ -59,8 +59,8 @@ const AsyncImage: React.FC<Props> = (props: Props) => {
       <img onLoad={onLoad} onError={onError} src={url} alt="Fetched Image" />
 
       {/* overlays */}
-      <p>Loading...</p>
-      <p>No image available.</p>
+      <p className={styles["overlay-loading"]}>Loading...</p>
+      <p className={styles["overlay-error"]}>No image available.</p>
     </div>
   );
 };

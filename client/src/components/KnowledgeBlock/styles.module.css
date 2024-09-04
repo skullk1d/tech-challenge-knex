@@ -1,11 +1,3 @@
-.loading > img {
-  background-color: yellow;
-}
-
-.error > img {
-  background-color: red;
-}
-
 .question-form {
   max-width: 600px;
   margin: 0 auto;

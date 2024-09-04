@@ -1,0 +1,18 @@
+.loading > img {
+  background-color: yellow;
+}
+.loading .overlay-loading {
+  display: block;
+}
+
+.error > img {
+  background-color: red;
+}
+.error .overlay-error {
+  display: block;
+}
+
+.overlay-loading,
+.overlay-error {
+  display: none;
+}
