@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import logoRise360 from "./logo-rise-360.svg";
 import logoRiseCom from "./logo-rise-com.svg";
 import "./App.css";
-import AsyncImage from "./components/AsyncImage";
 
 import type { AggregatedKnowledgeBlock } from "@server/api";
+import KnowledgeBlock from "./components/KnowledgeBlock";
 
 function App() {
   const [knowledgeBlocks, setKnowledgeBlocks] = useState<
@@ -37,24 +37,10 @@ function App() {
       </section>
       <section className="knowledge-check">
         {knowledgeBlocks.map((kb) => (
-          <div key={kb.knowledgeCheckBlockId}>
-            <h2>{kb.questionText}</h2>
-            <AsyncImage url={kb.mediaUrl ?? ""} />
-            <form>
-              {kb.answers
-                .sort((a, b) => a.answerPos - b.answerPos)
-                .map((kba) => (
-                  <div key={kba.answerId}>
-                    <label>{kba.answerText}</label>
-                    <input
-                      type={"radio"}
-                      value={kba.answerId}
-                      name={kba.answerId}
-                    />
-                  </div>
-                ))}
-            </form>
-          </div>
+          <KnowledgeBlock
+            key={kb.knowledgeCheckBlockId}
+            knowledgeCheckBlock={kb}
+          />
         ))}
       </section>
     </div>

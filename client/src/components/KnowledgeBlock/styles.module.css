@@ -1,0 +1,36 @@
+.loading > img {
+  background-color: yellow;
+}
+
+.error > img {
+  background-color: red;
+}
+
+.question-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.question-group {
+  margin-bottom: 20px;
+}
+
+.question-group h3 {
+  margin-top: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
