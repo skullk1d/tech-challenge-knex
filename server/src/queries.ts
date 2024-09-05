@@ -35,7 +35,7 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
         "answers.isCorrect as answerIsCorrect",
         "answers.pos as answerPos"
       )
-      .then((rows_) => {
+      .then(async (rows_) => {
         // ASSUMPTION: Knowledge blocks & answers already intersected at knowledge block id.
         //		Only 1 correct answer per knowledge block.
         //		Otherwise, listfy correct answers.
@@ -55,3 +55,16 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
         return Object.values(rowsHash);
       })
   );
+
+export const setUiState = async (
+  body: [userId: string, questionId: string, answerId: string]
+) => {
+  // Insert triples representing selected question-and-answer pairs
+  // HACK: Cannot get updated seed file to run so do everything ad-hoc
+  body.forEach(async ([userId, questionId, answerId]) => {
+    knex("uiState")
+      .insert([{ userId, questionId, answerId }])
+      .into("uiState")
+      .then((r) => console.log(r));
+  });
+};

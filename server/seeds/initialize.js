@@ -4,6 +4,7 @@ exports.seed = async (knex) => {
   await knex("knowledgeCheckBlocks").del();
   await knex("questions").del();
   await knex("media").del();
+  await knex("uiState").del();
 
   // Inserts seed entries
   await knex("media").insert([
