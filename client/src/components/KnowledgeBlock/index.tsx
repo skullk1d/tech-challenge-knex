@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.module.css";
 import { AggregatedKnowledgeBlock } from "@server/api";
 import AsyncImage from "../AsyncImage";
@@ -14,6 +14,41 @@ const KnowledgeBlock: React.FC<Props> = ({ knowledgeCheckBlock }: Props) => {
     e.preventDefault();
     console.log(selectedAnswerId);
   };
+
+  // Initialize selected answers, if available
+  // ASSUMPTION: Only one user -- otherwise, use context provider on authentication, pass along auth header, etc
+  // ASSUMPTION: Only one question per knowledge block -- otherwise, manage answers per question id
+  useEffect(() => {
+    fetch(
+      `http://localhost:5001/ui-state/${knowledgeCheckBlock.knowledgeCheckBlockId}`
+    ).then(async (res) => {
+      const data = await res.json();
+
+      if (data && data.length && typeof data[0] === "string") {
+        setSelectedAnswerId(data);
+      }
+    });
+  }, []);
+
+  // Update selected answer for user
+  useEffect(() => {
+    if (selectedAnswerId !== null) {
+      fetch(`http://localhost:5001/ui-state`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          knowledgeBlockId: knowledgeCheckBlock.knowledgeCheckBlockId,
+          answerId: selectedAnswerId,
+        }),
+      }).then(async (res) => {
+        const data = await res.json();
+
+        setSelectedAnswerId(data);
+      });
+    }
+  }, [selectedAnswerId]);
 
   return (
     <div className="question-form">

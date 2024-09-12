@@ -24,11 +24,6 @@ export async function up(knex: Knex): Promise<void> {
       table.string("type");
       table.string("url");
     }),
-    knex.schema.createTable("uiState", (table) => {
-      table.uuid("userId").primary();
-      table.uuid("questionId");
-      table.uuid("answerId");
-    }),
   ]);
 
   await Promise.all([
@@ -43,12 +38,6 @@ export async function up(knex: Knex): Promise<void> {
         .foreign("knowledgeCheckBlockId")
         .references("knowledgeCheckBlocks.id");
     }),
-    knex.schema.table("uiState", (table) => {
-      table.foreign("questionId").references("questions.id");
-      table.foreign("answerId").references("answers.id");
-      // NOTE: Had we implemented login...
-      /* table.foreign("userId").references("users.id"); */
-    }),
   ]);
 }
 
@@ -62,11 +51,6 @@ export async function down(knex: Knex): Promise<void> {
     }),
     knex.schema.table("answers", (table) => {
       table.dropForeign("knowledgeCheckBlockId");
-    }),
-    knex.schema.table("uiState", (table) => {
-      table.dropForeign("questionId");
-      table.dropForeign("answerId");
-      /* table.dropForeign("userId"); */
     }),
   ]);
 

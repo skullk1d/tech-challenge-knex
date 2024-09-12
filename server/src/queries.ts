@@ -1,9 +1,10 @@
 // NOTE: Using knex file, not distribution
 import knex from "./knex";
+import { v4 as uuid } from "uuid";
 
 // Aggregate all knowledge boxes with media, questions, and answers.
 //		Map correct & incorrect answers row to columns in joined table.
-export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
+export const selectAggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
   .join("questions", function () {
     this.on("questions.id", "=", "knowledgeCheckBlocks.questionId");
   })
@@ -56,15 +57,26 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
       })
   );
 
-export const setUiState = async (
-  body: [userId: string, questionId: string, answerId: string]
+export const insertUiState = async (
+  body: [/* userId: string,  */ knowledgeBlockId: string, answerId: string]
 ) => {
+  // Proxy for primary entity or "user id", whose implementation we've omitted
+  const id = uuid();
+
   // Insert triples representing selected question-and-answer pairs
-  // HACK: Cannot get updated seed file to run so do everything ad-hoc
-  body.forEach(async ([userId, questionId, answerId]) => {
+  body.forEach(async ([/* userId,  */ knowledgeBlockId, answerId]) => {
     knex("uiState")
-      .insert([{ userId, questionId, answerId }])
+      .insert([{ /* userId,  */ knowledgeBlockId, answerId }])
       .into("uiState")
-      .then((r) => console.log(r));
+      .then((r) => {
+        console.log(r);
+
+        return id;
+      });
   });
 };
+
+export const selectUiState = async (knowledgeBlockId: string) =>
+  knex("uiState")
+    .select("uiState.answerId")
+    .where("uiState.knowledgeCheckBlockId", "=", knowledgeBlockId);

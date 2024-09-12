@@ -2,19 +2,23 @@ import express, { Request, Response } from "express";
 import morgan from "morgan";
 
 import knex from "./knex";
-import { aggregateKnowledgeCheckBoxes, setUiState } from "./queries";
+import {
+  selectAggregateKnowledgeCheckBoxes,
+  insertUiState,
+  selectUiState,
+} from "./queries";
 
-const getKnowledgeCheckBlocks = async (req: Request, res: Response) => {
+const getKnowledgeCheckBlocks = async (_req: Request, res: Response) => {
   const knowledgeCheckBlocks = await knex("knowledgeCheckBlocks");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(knowledgeCheckBlocks);
 };
 
 const getAggregatedKnowledgeCheckBlocks = async (
-  req: Request,
+  _req: Request,
   res: Response
 ) => {
-  const knowledgeCheckBlocks = await aggregateKnowledgeCheckBoxes;
+  const knowledgeCheckBlocks = await selectAggregateKnowledgeCheckBoxes;
 
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(knowledgeCheckBlocks);
@@ -29,32 +33,39 @@ const getMedia = async (req: Request, res: Response) => {
 };
 */
 
-const postUiState = async (req: Request, res: Response) => {
-  const { body } = req;
+const getUiState = async (req: Request, res: Response) => {
+  const knowledgeBlockId = req.params.id;
+  const uiState = await selectUiState(knowledgeBlockId);
 
-  try {
-    await setUiState(body);
-
-    res.status(200).json({ message: "setUiState SUCCESS" });
-  } catch (error) {
-    console.error("setUiState ERROR:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.send(uiState);
 };
 
-/* const putUiState = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { body } = req;
+const postUiState = async (req: Request, res: Response) => {
+  const { userId, knowledgeBlockId, answerId } = req.body;
 
-  try {
-    await updateUiState(id, body);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST");
 
-    res.status(200).json({ message: "putUiState SUCCESS" });
-  } catch (error) {
-    console.error("putUiState ERROR:", error);
-    res.status(500).json({ error: "Internal server error" });
+  // NOTE: Error handling should be more targeted
+  if (!userId || !knowledgeBlockId || !answerId) {
+    res
+      .status(400)
+      .json({ error: "userId, knowledgeBlockId and answerId are required" });
+  } else {
+    try {
+      const id = await insertUiState([
+        /* userId,  */ knowledgeBlockId,
+        answerId,
+      ]);
+
+      res.status(200).json({ uiStateId: id, message: "setUiState SUCCESS" });
+    } catch (error) {
+      console.error("setUiState ERROR:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
-}; */
+};
 
 const app = express();
 const port = 5001;
@@ -71,6 +82,7 @@ app.get(
 app.get("/media", getMedia);
 */
 
+app.get("/ui-state/:id", getUiState);
 app.post("/ui-state", postUiState);
 /* app.put("/ui-state:id", putUiState); */
 
