@@ -16,7 +16,7 @@ exports.seed = async (knex) => {
     {
       id: "c86232bb-2bca-4c72-a046-e7f6dc78b4a6",
       type: "image",
-      url: "https://images.articulate.com/f:jpg%7Cpng,a:retain,b:fff/rise/courses/S3jQ2LjHDoRsPUQmR7dp6hA7-IaoYPA4/d229V-nstxA6tZdi.gif",
+      url: "https://images.articulate.com/f:jpg,a:retain,b:fff,w:1680,q:65/rise/courses/Dd__WlR_sLLXjJ3h8WX9JlZ6n2YGcYBY/dOnS66X1YMkCMnTA-stock-image.jpg",
     },
     {
       id: "eb3af7b2-b216-47a1-8216-7817420f5773",

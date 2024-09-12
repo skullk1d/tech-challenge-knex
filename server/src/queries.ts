@@ -47,7 +47,7 @@ export const aggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
           rowsHash[r.knowledgeCheckBlockId] = {
             ...r,
             answers: rows_.filter(
-              (r_) => r_.knowledgeCheckBlockId === r.answerKnowledgeCheckBlockId
+              (r_) => r_.answerKnowledgeCheckBlockId === r.knowledgeCheckBlockId
             ),
           };
         });

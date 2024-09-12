@@ -2,7 +2,7 @@ FROM node:20.14.0
 
 WORKDIR /service/
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN rm yarn.lock && yarn install
 COPY . ./
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /service/wait-for-it.sh
 RUN chmod a+rx /service/wait-for-it.sh
