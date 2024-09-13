@@ -1,28 +1,91 @@
-.question-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+.knowledge-block {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-left: 6rem;
+  padding-right: 6rem;
+  max-width: 92rem;
+  width: 83%;
+  margin-bottom: 2rem;
 }
 
-.question-group {
+.knowledge-block__question-form {
+  flex-direction: column;
+  flex: 1;
+  justify-self: center;
+  border: 0.1rem solid #ddd;
+  box-shadow: 0 0.2rem 3rem rgba(0, 0, 0, 0.1);
+  padding: 6.5rem 6rem 4rem;
+}
+
+.knowledge-block__question-group {
   margin-bottom: 20px;
 }
 
-.question-group h3 {
-  margin-top: 0;
+.knowledge-block__question-text {
+  margin-bottom: 1rem;
+  font-family: inherit;
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: -0.02rem;
+  line-height: 2;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.knowledge-block__async-image {
+  display: block;
+  max-height: 38rem;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.knowledge-block__async-image img {
+  background-size: contain;
+  width: 100%;
+  max-height: 38rem;
+}
+
+.knowledge-block__answer-group {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 0;
+  border-top: 0.1rem solid var(--color-caption-border, #8f8f8f);
+}
+
+.knowledge-block__answer-group li {
+  display: flex;
+  align-items: center;
+  padding: 3rem 5rem;
+  cursor: pointer;
+}
+
+.knowledge-block__answer-group li:hover {
+  background-color: #f7f7f8;
+}
+
+.knowledge-block__answer-group label {
+  font-size: 1.6rem;
+  line-height: 2rem;
+  margin-left: 3.5rem;
+  position: relative;
+}
+
+.knowledge-block__answer-group input[type="radio"]::before {
+  align-items: center;
+  border: 0.1rem solid #8a8c8d;
+  border-radius: 50%;
+  color: #8a8c8d;
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  left: 2rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
 }
 
 ul {
   list-style-type: none;
   padding-left: 0;
-}
-
-li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-input[type="radio"] {
-  margin-right: 10px;
 }

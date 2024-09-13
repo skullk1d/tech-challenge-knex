@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 
 type Props = {
   url: string;
+  className: string;
 };
 
 const AsyncImage: React.FC<Props> = (props: Props) => {
@@ -10,7 +11,7 @@ const AsyncImage: React.FC<Props> = (props: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  const { url } = props;
+  const { url, className } = props;
 
   const onLoad = useCallback(() => {
     setIsLoading(false);
@@ -54,7 +55,7 @@ const AsyncImage: React.FC<Props> = (props: Props) => {
     <div
       className={`${isLoading ? styles.loading : ""} ${
         hasError ? styles.error : ""
-      }`}
+      } ${className ? className : ""}`}
     >
       <img onLoad={onLoad} onError={onError} src={url} alt="Fetched Image" />
 

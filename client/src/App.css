@@ -24,3 +24,9 @@
   padding: 0 0.3rem;
   color: #8b0000;
 }
+
+.knowledge-check {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

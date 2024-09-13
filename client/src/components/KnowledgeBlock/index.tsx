@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./styles.module.css";
 import { AggregatedKnowledgeBlock } from "@server/api";
 import AsyncImage from "../AsyncImage";
+
+import styles from "./styles.module.css";
 
 type Props = {
   knowledgeCheckBlock: AggregatedKnowledgeBlock;
@@ -83,31 +85,41 @@ const KnowledgeBlock: React.FC<Props> = ({ knowledgeCheckBlock }: Props) => {
   }, [selectedAnswerId]);
 
   return (
-    <div className="question-form">
-      <form onSubmit={handleSubmit}>
-        <div className="question-group">
-          <h2>{knowledgeCheckBlock.questionText}</h2>
-          <AsyncImage url={knowledgeCheckBlock.mediaUrl ?? ""} />
-          <ul>
-            {knowledgeCheckBlock.answers
-              .sort((a, b) => a.answerPos - b.answerPos)
-              .map((kba) => (
-                <li key={kba.answerId}>
-                  <input
-                    type={"radio"}
-                    value={kba.answerId}
-                    name={kba.answerId}
-                    onChange={(e) => setSelectedAnswerId(e.target.value)}
-                    checked={selectedAnswerId === kba.answerId}
-                  />
-                  <label>{kba.answerText}</label>
-                </li>
-              ))}
-          </ul>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <section className={styles["knowledge-block"]}>
+      <div className={styles["knowledge-block__question-form"]}>
+        <form onSubmit={handleSubmit}>
+          <div className="knowledge-block__question-group">
+            <h2 className={styles["knowledge-block__question-text"]}>
+              {knowledgeCheckBlock.questionText}
+            </h2>
+            <AsyncImage
+              url={knowledgeCheckBlock.mediaUrl ?? ""}
+              className={styles["knowledge-block__async-image"]}
+            />
+            <ul className={styles["knowledge-block__answer-group"]}>
+              {knowledgeCheckBlock.answers
+                .sort((a, b) => a.answerPos - b.answerPos)
+                .map((kba) => (
+                  <li
+                    key={kba.answerId}
+                    onClick={() => setSelectedAnswerId(kba.answerId)}
+                  >
+                    <input
+                      type={"radio"}
+                      value={kba.answerId}
+                      name={kba.answerId}
+                      onChange={(e) => setSelectedAnswerId(e.target.value)}
+                      checked={selectedAnswerId === kba.answerId}
+                    />
+                    <label>{kba.answerText}</label>
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
   );
 };
 

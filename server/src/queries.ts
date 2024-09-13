@@ -36,6 +36,7 @@ export const selectAggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
         "answers.isCorrect as answerIsCorrect",
         "answers.pos as answerPos"
       )
+      .orderBy("answerPos", "asc")
       .then(async (rows_) => {
         // ASSUMPTION: Knowledge blocks & answers already intersected at knowledge block id.
         //		Only 1 correct answer per knowledge block.
