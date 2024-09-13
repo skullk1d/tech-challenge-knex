@@ -58,25 +58,26 @@ export const selectAggregateKnowledgeCheckBoxes = knex("knowledgeCheckBlocks")
   );
 
 export const insertUiState = async (
-  body: [/* userId: string,  */ knowledgeBlockId: string, answerId: string]
+  body: [id: string, knowledgeBlockId: string, answerId: string]
 ) => {
-  // Proxy for primary entity or "user id", whose implementation we've omitted
-  const id = uuid();
-
   // Insert triples representing selected question-and-answer pairs
-  body.forEach(async ([/* userId,  */ knowledgeBlockId, answerId]) => {
-    knex("uiState")
-      .insert([{ /* userId,  */ knowledgeBlockId, answerId }])
-      .into("uiState")
-      .then((r) => {
-        console.log(r);
+  const [id, knowledgeBlockId, answerId] = body;
 
-        return id;
-      });
-  });
+  if (id) {
+    // TODO: PUT method
+    return knex("uiState").update({ answerId }).where({ id }).returning("id");
+  } else {
+    // Proxy for primary entity or "user id", whose implementation we've omitted
+    const id_ = id || uuid();
+
+    return knex("uiState")
+      .insert([{ id: id_, knowledgeCheckBlockId: knowledgeBlockId, answerId }])
+      .into("uiState")
+      .returning("id");
+  }
 };
 
 export const selectUiState = async (knowledgeBlockId: string) =>
   knex("uiState")
-    .select("uiState.answerId")
+    .select("*")
     .where("uiState.knowledgeCheckBlockId", "=", knowledgeBlockId);

@@ -9,6 +9,8 @@ type Props = {
 
 const KnowledgeBlock: React.FC<Props> = ({ knowledgeCheckBlock }: Props) => {
   const [selectedAnswerId, setSelectedAnswerId] = useState<string | null>(null);
+  const [prevAnswerId, setPrevAnswerId] = useState<string | null>(null);
+  const [uiStateId, setUiStateId] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,29 +26,59 @@ const KnowledgeBlock: React.FC<Props> = ({ knowledgeCheckBlock }: Props) => {
     ).then(async (res) => {
       const data = await res.json();
 
-      if (data && data.length && typeof data[0] === "string") {
-        setSelectedAnswerId(data);
+      if (res.ok && data && data.length) {
+        // ASSUMPTION: One result
+        const { id, knowledgeCheckBlockId, answerId } = data[0];
+
+        if (
+          knowledgeCheckBlock.knowledgeCheckBlockId === knowledgeCheckBlockId
+        ) {
+          setSelectedAnswerId(answerId);
+          setUiStateId(id);
+        } else {
+          console.warn(
+            "KnowledgeBlock Mismatched Id: expected",
+            knowledgeCheckBlock.knowledgeCheckBlockId,
+            "received",
+            knowledgeCheckBlockId
+          );
+        }
       }
     });
   }, []);
 
   // Update selected answer for user
   useEffect(() => {
-    if (selectedAnswerId !== null) {
+    // ASSUMPTION: Optimistic updates
+    if (selectedAnswerId && selectedAnswerId !== prevAnswerId) {
       fetch(`http://localhost:5001/ui-state`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          id: uiStateId ?? "",
           knowledgeBlockId: knowledgeCheckBlock.knowledgeCheckBlockId,
           answerId: selectedAnswerId,
         }),
-      }).then(async (res) => {
-        const data = await res.json();
+      })
+        .then(async (res) => {
+          if (res.ok) {
+            setPrevAnswerId(selectedAnswerId);
 
-        setSelectedAnswerId(data);
-      });
+            if (!uiStateId) {
+              const { id } = await res.json();
+
+              setUiStateId(id);
+            }
+          } else {
+            setSelectedAnswerId(prevAnswerId);
+          }
+        })
+        .catch((e) => {
+          setSelectedAnswerId(null);
+          console.error(e);
+        });
     }
   }, [selectedAnswerId]);
 
