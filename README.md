@@ -81,9 +81,16 @@ Once submitted, your challenge will be reviewed by one or two engineers on the t
 
 - Remove root dir for quick sharing of types via server/client
 - CSS modules declarations file
+- When running `docker compose up --build` to rebuild to see changes to seed/migrations, blocked by corrupted yarn.lock file (solved by updating docker file to delete yarn.lock and re-install packages without `--frozen-lockfile`, and then use regenerated lockfile from inside container in original workspace
+- Realized while debugging queries that all media gifs are the same, so joins are in fact working
+- Realized late that I need to run `docker compose down` to retry migrations rather than simply exiting out and re-upping the errored container
 
 ## Omissions
 
 - Environment variables for prod/dev host urls, etc
 - Responsiveness
 - UI state per user (login/auth)
+- Decoupling answers from knowledge blocks to avoid cheating by inspection
+- CSS transitions
+- Mobile viewport media queries
+- Installing exact fonts (icons slightly different)
