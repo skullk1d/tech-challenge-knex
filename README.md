@@ -103,3 +103,8 @@ Once submitted, your challenge will be reviewed by one or two engineers on the t
 ### Answered
 
 ![](/screen_answered.png?raw=true)
+
+### Mobile
+
+![](/screen_mobile.png?raw=true)
+![](/screen_mobile_error.png?raw=true)
