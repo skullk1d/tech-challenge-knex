@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./styles.module.css";
 import { AggregatedKnowledgeBlock } from "@server/api";
 import AsyncImage from "../AsyncImage";
@@ -17,6 +17,12 @@ const KnowledgeBlock: React.FC<Props> = ({ knowledgeCheckBlock }: Props) => {
   const [uiStateId, setUiStateId] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("default");
 
+  const selectedAnswer = useMemo(
+    () =>
+      knowledgeCheckBlock.answers.find((a) => a.answerId === selectedAnswerId),
+    [selectedAnswerId]
+  );
+
   const handleOnChangeAnswer = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSelectedAnswerId(e.target.value);
@@ -26,13 +32,27 @@ const KnowledgeBlock: React.FC<Props> = ({ knowledgeCheckBlock }: Props) => {
     [selectedAnswerId]
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
 
-    if (!selectedAnswerId) {
-      setStatus("no-answer");
-    }
-  };
+      if (!selectedAnswerId) {
+        setStatus("no-answer");
+      } else if (!selectedAnswer) {
+        setStatus("error");
+      } else if (selectedAnswer.answerIsCorrect) {
+        setStatus("correct");
+      } else if (!selectedAnswer.answerIsCorrect) {
+        setStatus("incorrect");
+      }
+    },
+    [selectedAnswerId, selectedAnswer]
+  );
+
+  const handleOnClickRetake = useCallback(() => {
+    setSelectedAnswerId(null);
+    setStatus("default");
+  }, [selectedAnswerId]);
 
   // Initialize selected answers, if available
   // ASSUMPTION: Only one user -- otherwise, use context provider on authentication, pass along auth header, etc
@@ -165,11 +185,42 @@ const KnowledgeBlock: React.FC<Props> = ({ knowledgeCheckBlock }: Props) => {
               <button type="submit">Submit</button>
             ) : null}
           </div>
-          <div className={styles["knowledge-block__result-group"]}>
-            <div className={styles[`knowledge-block__result-group__icon`]}>
-              <i className={styles[`${status}`]}></i>
+          {["correct", "incorrect"].find((s) => s === status) ? (
+            <div className={styles["knowledge-block__result-group"]}>
+              <div className={styles[`knowledge-block__result-group__icon`]}>
+                <i className={styles[`${status}`]}></i>
+              </div>
+              <div className={styles[`knowledge-block__result-group__label`]}>
+                {
+                  {
+                    "no-answer": "",
+                    default: "",
+                    correct: "Correct",
+                    incorrect: "Incorrect",
+                    error: "Something went wrong -- please try again",
+                  }[status]
+                }
+              </div>
+              <div
+                className={styles[`knowledge-block__result-group__feedback`]}
+              >
+                {knowledgeCheckBlock.feedback}
+              </div>
             </div>
-          </div>
+          ) : null}
+          {["correct", "incorrect", "error"].find((s) => s === status) ? (
+            <div
+              className={styles[`knowledge-block__retake-group`]}
+              onClick={handleOnClickRetake}
+            >
+              <div className={styles[`knowledge-block__retake-group__label`]}>
+                Take again
+              </div>
+              <div className={styles[`knowledge-block__retake-group__icon`]}>
+                <i></i>
+              </div>
+            </div>
+          ) : null}
         </form>
       </div>
     </section>
