@@ -73,7 +73,7 @@ exports.seed = async (knex) => {
     {
       id: "b963b3fb-5b0f-40bb-b0d1-010beaf9ca99",
       questionId: "5c96f2bd-090a-4d8a-80b8-4d90c4299101",
-      feedback: "Feedback",
+      feedback: "Definitely not Janice from accounting.",
     },
   ]);
 
@@ -96,14 +96,14 @@ exports.seed = async (knex) => {
     {
       id: "305fae31-d84f-4f39-9073-2805df980c0d",
       knowledgeCheckBlockId: "b963b3fb-5b0f-40bb-b0d1-010beaf9ca99",
-      text: "Jill from Accounting",
+      text: "Jill from IT",
       isCorrect: true,
       pos: 1,
     },
     {
       id: "2040d5ba-50f2-419f-bd41-5f5dc4f17e81",
       knowledgeCheckBlockId: "b963b3fb-5b0f-40bb-b0d1-010beaf9ca99",
-      text: "Jenn from IT",
+      text: "Janice from Accounting",
       isCorrect: false,
       pos: 0,
     },
