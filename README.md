@@ -88,9 +88,18 @@ Once submitted, your challenge will be reviewed by one or two engineers on the t
 ## Omissions
 
 - Environment variables for prod/dev host urls, etc
-- Responsiveness
 - UI state per user (login/auth)
 - Decoupling answers from knowledge blocks to avoid cheating by inspection
 - CSS transitions
 - Mobile viewport media queries
 - Installing exact fonts (icons slightly different)
+
+## Screenies
+
+### Idle
+
+![](/screen_idle.png?raw=true)
+
+### Answered
+
+![](/screen_answered.png?raw=true)
